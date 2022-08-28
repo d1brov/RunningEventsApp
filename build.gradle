@@ -1,22 +1,67 @@
 plugins {
+	id 'java'
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-	id 'java'
+	id 'jacoco'
+	id 'checkstyle'
+	id 'org.flywaydb.flyway' version '9.1.5'
 }
 
 group = 'com.portfolio'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	// controller endpoints
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// persistence
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.postgresql:postgresql'
+
+	// dev tools
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/db'
+	user = 'admin'
+	password = 'admin'
+	cleanDisabled = false
+}
+
+jacocoTestReport {
+	dependsOn test
+	dependsOn check
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					"com/portfolio/app/App.class"
+			])
+		}))
+	}
 }
