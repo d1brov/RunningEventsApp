@@ -1,18 +1,14 @@
 package com.portfolio.app.persistence.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "roles")
-@NoArgsConstructor
-@Getter
-@Setter
 public class Role {
     @Id
     @GeneratedValue
@@ -21,9 +17,13 @@ public class Role {
     @Column(name = "name")
     private String name;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<UserCredentials> userCredentials;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "roles_permissions",

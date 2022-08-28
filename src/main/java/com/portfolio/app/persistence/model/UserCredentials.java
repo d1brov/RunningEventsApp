@@ -1,17 +1,13 @@
 package com.portfolio.app.persistence.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "user_credentials")
-@NoArgsConstructor
-@Getter
-@Setter
 @SuppressWarnings("checkstyle:MemberName")
 public class UserCredentials {
     @Id
@@ -34,6 +30,8 @@ public class UserCredentials {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "user_credentials_roles",
