@@ -1,7 +1,7 @@
 -- creating permissions
-INSERT INTO permissions (name) VALUES ('PERMISSION_ADMIN');
-INSERT INTO permissions (name) VALUES ('PERMISSION_EVENT_ADMIN');
-INSERT INTO permissions (name) VALUES ('PERMISSION_USER');
+--INSERT INTO permissions (name) VALUES ('PERMISSION_ADMIN');
+--INSERT INTO permissions (name) VALUES ('PERMISSION_EVENT_ADMIN');
+--INSERT INTO permissions (name) VALUES ('PERMISSION_USER');
 
 -- creating roles
 INSERT INTO roles (name) VALUES ('ADMIN');
@@ -9,9 +9,9 @@ INSERT INTO roles (name) VALUES ('EVENT_ADMIN');
 INSERT INTO roles (name) VALUES ('USER');
 
 -- setting permissions for roles
-INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 1);
-INSERT INTO roles_permissions (role_id, permission_id) VALUES (2, 2);
-INSERT INTO roles_permissions (role_id, permission_id) VALUES (3, 3);
+--INSERT INTO roles_permissions (role_id, permission_id) VALUES (1, 1);
+--INSERT INTO roles_permissions (role_id, permission_id) VALUES (2, 2);
+--INSERT INTO roles_permissions (role_id, permission_id) VALUES (3, 3);
 
 --------------- creating users ---------------
 --admin
