@@ -20,7 +20,13 @@ public class FilterChainConfiguration {
 
         // open endpoints
         httpSecurity.authorizeRequests()
-                .antMatchers(GET, "/test/open").permitAll();
+                .antMatchers(
+                        "/registration",
+                        "/users",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/**/api-docs/**"
+                ).permitAll();
 
         // secure endpoints
         httpSecurity
@@ -32,7 +38,7 @@ public class FilterChainConfiguration {
         httpSecurity.authorizeRequests().anyRequest().authenticated();
 
         // basic authentication
-        httpSecurity.httpBasic();
+        //httpSecurity.httpBasic();
 
         return httpSecurity.build();
     }
