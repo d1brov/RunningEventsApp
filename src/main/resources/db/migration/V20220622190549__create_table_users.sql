@@ -1,23 +1,23 @@
-CREATE TABLE "users"
+CREATE TABLE "user_credentials"
 (
-    "id"                SERIAL,
-    "first_name"        VARCHAR(64)   NOT NULL,
-    "last_name"         VARCHAR(64)   NOT NULL,
-    "email"             VARCHAR(64)   NOT NULL  UNIQUE,
-    "phone"             VARCHAR(64)   NOT NULL  UNIQUE,
-    "emergency_phone"   VARCHAR(64)   NOT NULL,
+    "id"                 SERIAL,
+    "username"           VARCHAR(64) NOT NULL UNIQUE,
+    "password"           VARCHAR(1024) NOT NULL,
+    "is_email_confirmed" BOOLEAN NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE "user_credentials"
+CREATE TABLE "users"
 (
-    "user_id"            INTEGER UNIQUE,
-    "username"           VARCHAR(64) NOT NULL UNIQUE,
-    "password"           VARCHAR(1024) NOT NULL,
-    "is_enabled"         BOOLEAN NOT NULL,
-    "is_email_confirmed" BOOLEAN NOT NULL,
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    "id"                SERIAL,
+    "first_name"        VARCHAR(64),
+    "last_name"         VARCHAR(64),
+    "email"             VARCHAR(64) NOT NULL UNIQUE,
+    "phone"             VARCHAR(64) UNIQUE,
+    "emergency_phone"   VARCHAR(64),
+    "credentials_id"    INTEGER NOT NULL UNIQUE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (credentials_id) REFERENCES user_credentials(id) ON DELETE CASCADE
 );
 
 CREATE TABLE "permissions"
@@ -45,9 +45,9 @@ CREATE TABLE "roles_permissions"
 
 CREATE TABLE "user_credentials_roles"
 (
-    "user_id"   INTEGER NOT NULL,
+    "user_credential_id"  INTEGER NOT NULL,
     "role_id"   INTEGER NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES user_credentials(user_id),
+    PRIMARY KEY (user_credential_id, role_id),
+    FOREIGN KEY (user_credential_id) REFERENCES user_credentials(id),
     FOREIGN KEY (role_id) REFERENCES roles(id)
 )

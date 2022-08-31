@@ -1,41 +1,41 @@
 package com.portfolio.app.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "user_credentials")
-@SuppressWarnings("checkstyle:MemberName")
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class UserCredentials {
     @Id
-    @Column(name = "user_id")
-    private Integer user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Integer id;
 
     @Column(name = "username")
+    @NonNull
     private String username;
 
     @Column(name = "password")
+    @NonNull
     private String password;
 
-    @Column(name = "is_enabled")
-    private boolean isEnabled;
-
     @Column(name = "is_email_confirmed")
-    private boolean isEmailConfirmed;
+    @NonNull
+    private Boolean isEmailConfirmed;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(
             name = "user_credentials_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "user_credential_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @NonNull
     private Set<Role> roles;
 }

@@ -4,12 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
-    @GeneratedValue
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
@@ -27,8 +31,12 @@ public class User {
     @Column(name = "emergency_phone")
     private String emergencyPhoneNumber;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "credentials_id", referencedColumnName = "id")
     private UserCredentials credentials;
+
+    public void setEmail(String email) {
+        this.email = email;
+        this.credentials.setUsername(email);
+    }
 }
