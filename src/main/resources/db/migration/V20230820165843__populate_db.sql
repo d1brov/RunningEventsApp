@@ -19,7 +19,7 @@ INSERT INTO user_credentials (username, password, is_email_confirmed) VALUES ('a
 INSERT INTO user_credentials_roles (user_credential_id, role_id) VALUES (1, 1);
 INSERT INTO user_credentials_roles (user_credential_id, role_id) VALUES (1, 2);
 INSERT INTO user_credentials_roles (user_credential_id, role_id) VALUES (1, 3);
-INSERT INTO users (credentials_id, first_name, last_name, email, phone, emergency_phone) VALUES (1, 'Admin', 'Adminovych', 'admin@mail.com', '380000000000', '380000000001');
+INSERT INTO users (credentials_id, first_name, last_name, gender, birth_date, email, phone, emergency_phone) VALUES (1, 'Admin', 'Adminovych', 'FEMALE', '1989-09-01', 'admin@mail.com', '380000000000', '380000000001');
 
 
 --INSERT INTO users (first_name, last_name, email, phone, emergency_phone) VALUES ('Leonid', 'Kadenyuk', 'user@mail.com', '380000000006', '380000000008');

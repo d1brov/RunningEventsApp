@@ -3,6 +3,7 @@ package com.portfolio.app.persistence.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +22,13 @@ public class User {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 
     @Column(name = "email")
     private String email;

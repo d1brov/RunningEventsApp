@@ -12,6 +12,8 @@ CREATE TABLE "users"
     "id"                SERIAL,
     "first_name"        VARCHAR(64),
     "last_name"         VARCHAR(64),
+    "gender"            VARCHAR(64),
+    "birth_date"        DATE,
     "email"             VARCHAR(64) NOT NULL UNIQUE,
     "phone"             VARCHAR(64) UNIQUE,
     "emergency_phone"   VARCHAR(64),

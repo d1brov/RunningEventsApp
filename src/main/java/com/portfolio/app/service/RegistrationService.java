@@ -45,6 +45,8 @@ public class RegistrationService {
                 null,
                 userRegistrationDto.getFirstName(),
                 userRegistrationDto.getLastName(),
+                userRegistrationDto.getGender(),
+                userRegistrationDto.getBirthDate(),
                 email,
                 userRegistrationDto.getPhoneNumber(),
                 userRegistrationDto.getEmergencyPhoneNumber(),
