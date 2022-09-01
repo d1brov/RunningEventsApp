@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -24,15 +22,15 @@ public class UserRegistrationDto {
 
     private Gender gender;
 
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "Email must not be empty")
+    @Email(message = "Email must be valid")
     private String email;
 
     private String phoneNumber;
 
     private String emergencyPhoneNumber;
 
-    @NotEmpty
-    @Size(min = 8, message = "password should have at least 8 characters")
+    @NotEmpty(message = "Password must not be empty")
+    @Size(min = 8, max = 64, message = "Password must be 8 - 64 characters length")
     private String password;
 }

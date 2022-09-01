@@ -8,7 +8,7 @@ import com.portfolio.app.web.dto.UserRegistrationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("registration")
