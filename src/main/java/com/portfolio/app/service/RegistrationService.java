@@ -8,8 +8,8 @@ import com.portfolio.app.persistence.repository.UserCredentialsRepository;
 import com.portfolio.app.persistence.repository.UserRepository;
 import com.portfolio.app.security.access.RoleName;
 import com.portfolio.app.web.dto.UserRegistrationDto;
+import com.portfolio.app.web.exception.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +25,14 @@ public class RegistrationService {
 
     public User register(UserRegistrationDto userRegistrationDto) {
         String email = userRegistrationDto.getEmail();
+
         if (userCredentialsRepository.findByUsername(email) != null) {
-            throw new NotYetImplementedException("IMPLEMENT ERROR THROW user already exists");
+            throw new UserAlreadyExistsException(
+                    String.format("User with email '%s' already exists", email));
         }
 
         String encodedPassword = passwordEncoder.encode(userRegistrationDto.getPassword());
-
         Role userRole = roleRepository.findByName(RoleName.USER.name());
-
         UserCredentials credentials = new UserCredentials(
                 email,
                 encodedPassword,
