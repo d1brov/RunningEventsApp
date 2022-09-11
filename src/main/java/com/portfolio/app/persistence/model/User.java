@@ -1,9 +1,11 @@
 package com.portfolio.app.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -42,6 +44,10 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "credentials_id", referencedColumnName = "id")
     private UserCredentials credentials;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Record> records;
 
     public void setEmail(String email) {
         this.email = email;

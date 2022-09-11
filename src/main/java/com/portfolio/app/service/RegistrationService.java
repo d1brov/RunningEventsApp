@@ -44,7 +44,7 @@ public class RegistrationService {
                 Set.of(userRole)
         );
 
-        // todo maybe better set initialization with null checks
+        //todo maybe better set initialization with null checks
         User user = new User(
                 null,
                 userRegistrationDto.getFirstName(),
@@ -54,7 +54,8 @@ public class RegistrationService {
                 email,
                 userRegistrationDto.getPhoneNumber(),
                 userRegistrationDto.getEmergencyPhoneNumber(),
-                credentials
+                credentials,
+                null
         );
 
         return userRepository.save(user);

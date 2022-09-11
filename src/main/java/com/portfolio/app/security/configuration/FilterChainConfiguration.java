@@ -22,7 +22,8 @@ public class FilterChainConfiguration {
         httpSecurity.authorizeRequests()
                 .antMatchers(
                         "/registration",
-                        "/users",
+                        "/events/**",
+                        "/users/**",
                         "/swagger-ui/**",
                         "/swagger-resources/**",
                         "/**/api-docs/**"
