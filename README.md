@@ -105,7 +105,7 @@ My todo list right now:
   - event operations (create event, update event, delete event)
 
 ## Endpoints
-![](\readme_images\endpoints.png)
+![](/readme_images/endpoints.png)
 
 ## Current DB schema
-![](\readme_images\db_schema.png)
+![](/readme_images/db_schema.png)
