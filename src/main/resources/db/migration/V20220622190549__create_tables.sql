@@ -52,4 +52,32 @@ CREATE TABLE "user_credentials_roles"
     PRIMARY KEY (user_credential_id, role_id),
     FOREIGN KEY (user_credential_id) REFERENCES user_credentials(id),
     FOREIGN KEY (role_id) REFERENCES roles(id)
-)
+);
+
+CREATE TABLE "events" (
+	"id"            SERIAL NOT NULL,
+	"name"          VARCHAR(64) NOT NULL UNIQUE,
+	"description"   VARCHAR(2048) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "races" (
+	"id"            SERIAL NOT NULL,
+	"event_id"      INTEGER NOT NULL,
+	"date"          DATE NOT NULL,
+	"distance"      INTEGER NOT NULL,
+	"name"          VARCHAR(64) NOT NULL UNIQUE,
+	"description"   VARCHAR(2048) NOT NULL UNIQUE,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "records" (
+	"race_id"       INTEGER NOT NULL,
+	"user_id"       INTEGER NOT NULL,
+	"bib_number"    INTEGER NOT NULL UNIQUE, -- todo make it STRING. Unique?
+	"start_time"    TIMESTAMP,
+	"finish_time"   TIMESTAMP,
+	PRIMARY KEY (race_id, user_id),
+	FOREIGN KEY (race_id) REFERENCES races(id),
+	FOREIGN KEY (user_id) REFERENCES users(id)
+);
